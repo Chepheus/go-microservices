@@ -1,0 +1,26 @@
+version: "3.5"
+
+services:
+  current_time:
+    container_name: current_time
+    image: current-time-service
+    build:
+      context: .
+      dockerfile: ./current-time-service/docker/Dockerfile
+    networks:
+      - local
+    ports:
+      - "8080:8080"
+
+  metrics:
+    container_name: metrics
+    image: metrics-service
+    build:
+      context: .
+      dockerfile: ./metrics-service/docker/Dockerfile
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge
